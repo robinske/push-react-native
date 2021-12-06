@@ -13,6 +13,7 @@ import TwilioVerify, {
 
 export const createFactor = async (phoneNumber) => {
   const identity = hash(phoneNumber);
+  console.log(identity);
 
   const response = await fetch(ACCESS_TOKEN_URL, {
     method: "POST",
@@ -23,32 +24,43 @@ export const createFactor = async (phoneNumber) => {
     body: JSON.stringify({
       identity: identity,
     }),
-  });
+  }).catch((err) => console.log(`Error fetching access token: ${err}`));
 
   const json = await response.json();
+  const deviceName = "Kelley's iPhone 12";
   // const deviceName = await getDeviceName().catch(
   //   () => `${phoneNumber}'s Device'`
   // );
-  const deviceName = "Kelley's iPhone";
 
+  const deviceToken = "000000000000000000000000000000000123";
   // const deviceToken = await getDeviceToken().catch(
   //   () => "000000000000000000000000000000000000"
   // );
-  const deviceToken = "000000000000000000000000000000000000";
 
-  let factor = await TwilioVerify.createFactor(
-    new PushFactorPayload(
+  console.log("registering...");
+  // const payload = ;
+
+  // console.log(payload);
+
+  try {
+    const payload = new PushFactorPayload(
       deviceName,
       json.serviceSid,
       json.identity,
       deviceToken,
       json.token
-    )
-  );
+    );
+    console.log(payload);
+    let factor = await TwilioVerify.createFactor(payload);
+  } catch (err) {
+    console.log(`ERROR: ${err}`);
+  }
 
-  factor = await TwilioVerify.verifyFactor(
-    new VerifyPushFactorPayload(factor.sid)
-  );
+  // factor = await TwilioVerify.verifyFactor(
+  //   new VerifyPushFactorPayload(factor.sid)
+  // ).catch((err) => {
+  //   console.log(`Error verifying factor: ${err}`);
+  // });
 };
 
 export const sendSmsVerification = async (phoneNumber) => {

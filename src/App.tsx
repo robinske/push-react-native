@@ -22,7 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName="RegisterPush"
         screenOptions={{
           headerShown: false,
         }}

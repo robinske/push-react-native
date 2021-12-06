@@ -15,7 +15,11 @@ const RegisterPush = ({ route }) => {
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
         onPress={() => {
-          createFactor(phoneNumber);
+          console.log("here1");
+          createFactor(phoneNumber)
+            .then((res) => console.log("here2"))
+            .catch((err) => console.log("oh no"));
+          console.log("here3");
         }}
       >
         <Text style={styles.buttonText}>Yes, use this device</Text>
