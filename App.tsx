@@ -2,23 +2,21 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { StatusBar } from "react-native";
 import PhoneNumber from "./screens/PhoneNumber";
 import Otp from "./screens/Otp";
 import Gated from "./screens/Gated";
 
 const App = () => {
-  type RootParamList = {
+  type StackParamList = {
     PhoneNumber: undefined;
     Otp: { phoneNumber: string };
     Gated: undefined;
   };
 
-  const Stack = createNativeStackNavigator<RootParamList>();
+  const Stack = createNativeStackNavigator<StackParamList>();
 
   return (
     <NavigationContainer>
-      <StatusBar barStyle="dark-content" />
       <Stack.Navigator
         initialRouteName="PhoneNumber"
         screenOptions={{
