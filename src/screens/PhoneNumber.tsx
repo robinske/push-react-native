@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  Button,
   Text,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -57,6 +58,10 @@ const PhoneNumber = ({ navigation }) => {
               >{`Sent SMS to ${formattedValue}`}</Text>
             </View>
           )}
+          <Button
+            title="Log in"
+            onPress={() => navigation.replace("Welcome")}
+          />
         </SafeAreaView>
       </View>
     </>

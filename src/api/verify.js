@@ -1,6 +1,6 @@
 import { BASE_URL } from "@env";
 
-const sendSmsVerification = async (phoneNumber) => {
+export const sendSmsVerification = async (phoneNumber) => {
   try {
     const data = JSON.stringify({
       to: phoneNumber,
@@ -23,7 +23,7 @@ const sendSmsVerification = async (phoneNumber) => {
   }
 };
 
-const checkVerification = async (phoneNumber, code) => {
+export const checkVerification = async (phoneNumber, code) => {
   try {
     const data = JSON.stringify({
       to: phoneNumber,
@@ -44,9 +44,4 @@ const checkVerification = async (phoneNumber, code) => {
     console.error(error);
     return false;
   }
-};
-
-module.exports = {
-  sendSmsVerification,
-  checkVerification,
 };
