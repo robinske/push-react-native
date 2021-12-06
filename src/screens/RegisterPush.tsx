@@ -1,7 +1,11 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const RegisterPush = () => {
+import { createFactor } from "../api/verify";
+
+const RegisterPush = ({ route }) => {
+  // const { phoneNumber } = route.params;
+  const phoneNumber = "+12313576187";
   return (
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.prompt}>Secure your account with this device?</Text>
@@ -10,7 +14,9 @@ const RegisterPush = () => {
       </Text>
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
-        onPress={() => console.log("register")}
+        onPress={() => {
+          createFactor(phoneNumber);
+        }}
       >
         <Text style={styles.buttonText}>Yes, use this device</Text>
       </TouchableOpacity>

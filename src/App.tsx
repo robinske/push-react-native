@@ -22,7 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Gated"
+        initialRouteName="Welcome"
         screenOptions={{
           headerShown: false,
         }}
