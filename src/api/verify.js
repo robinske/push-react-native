@@ -63,6 +63,22 @@ export const createFactor = async (phoneNumber) => {
   // });
 };
 
+export const getChallenge = async (factorSid, challengeSid) => {
+  // const challenge = await TwilioVerify.getChallenge(challengeSid, factorSid);
+  // return challenge;
+  return {
+    location: "United States",
+    deviceInfo: "Chrome running on Mac OSX",
+    sid: "abc1232456",
+  };
+};
+
+export const updateChallenge = async (factorSid, challengeSid, status) => {
+  await TwilioVerify.updateChallenge(
+    new UpdatePushChallengePayload(factorSid, challengeSid, status)
+  );
+};
+
 export const sendSmsVerification = async (phoneNumber) => {
   try {
     const data = JSON.stringify({
