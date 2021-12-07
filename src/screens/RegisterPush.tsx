@@ -5,7 +5,7 @@ import { createFactor } from "../api/verify";
 
 const RegisterPush = ({ route }) => {
   // const { phoneNumber } = route.params;
-  const phoneNumber = "placeholder identity";
+  const phoneNumber = "placeholder-1052ce9377afc64bca";
   return (
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.prompt}>Secure your account with this device?</Text>
