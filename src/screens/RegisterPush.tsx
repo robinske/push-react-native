@@ -5,7 +5,7 @@ import { createFactor } from "../api/verify";
 
 const RegisterPush = ({ route }) => {
   // const { phoneNumber } = route.params;
-  const phoneNumber = "+12313576187";
+  const phoneNumber = "placeholder identity";
   return (
     <SafeAreaView style={styles.wrapper}>
       <Text style={styles.prompt}>Secure your account with this device?</Text>
@@ -15,11 +15,7 @@ const RegisterPush = ({ route }) => {
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
         onPress={() => {
-          console.log("here1");
-          createFactor(phoneNumber)
-            .then((res) => console.log("here2"))
-            .catch((err) => console.log("oh no"));
-          console.log("here3");
+          createFactor(phoneNumber);
         }}
       >
         <Text style={styles.buttonText}>Yes, use this device</Text>
