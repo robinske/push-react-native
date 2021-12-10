@@ -1,5 +1,5 @@
 import { BASE_URL, ACCESS_TOKEN_URL } from "@env";
-// import { getDeviceName, getDeviceToken } from "react-native-device-info";
+import { getDeviceName, getDeviceToken } from "react-native-device-info";
 
 // TODO - implement hashing1!
 function hash(value) {
@@ -9,11 +9,12 @@ function hash(value) {
 
 import TwilioVerify, {
   PushFactorPayload,
+  VerifyPushFactorPayload,
 } from "@twilio/twilio-verify-for-react-native";
 
 export const createFactor = async (phoneNumber) => {
+  console.log("creating factor!");
   const identity = hash(phoneNumber);
-  console.log(identity);
 
   const response = await fetch(ACCESS_TOKEN_URL, {
     method: "POST",
@@ -26,41 +27,38 @@ export const createFactor = async (phoneNumber) => {
     }),
   }).catch((err) => console.log(`Error fetching access token: ${err}`));
 
+  console.log("fetched access token");
+
   const json = await response.json();
-  const deviceName = "Kelley's iPhone 12";
-  // const deviceName = await getDeviceName().catch(
-  //   () => `${phoneNumber}'s Device'`
-  // );
 
-  const deviceToken = "000000000000000000000000000000000123";
-  // const deviceToken = await getDeviceToken().catch(
-  //   () => "000000000000000000000000000000000000"
-  // );
+  console.log(json.identity);
+  const deviceName = await getDeviceName().catch(
+    () => `${phoneNumber}'s Device'`
+  );
 
-  console.log("registering...");
-  // const payload = ;
+  const deviceToken = await getDeviceToken().catch(
+    () => "000000000000000000000000000000000000"
+  );
 
-  // console.log(payload);
+  console.log(deviceToken);
 
-  try {
-    const payload = new PushFactorPayload(
-      deviceName,
-      json.serviceSid,
-      json.identity,
-      deviceToken,
-      json.token
-    );
-    let factor = await TwilioVerify.createFactor(payload);
-    console.log(factor.sid);
-  } catch (err) {
-    console.log(`ERROR: ${err}`);
-  }
+  const payload = new PushFactorPayload(
+    deviceName,
+    json.serviceSid,
+    json.identity,
+    deviceToken,
+    json.token
+  );
+  let factor = await TwilioVerify.createFactor(payload);
 
-  // factor = await TwilioVerify.verifyFactor(
-  //   new VerifyPushFactorPayload(factor.sid)
-  // ).catch((err) => {
-  //   console.log(`Error verifying factor: ${err}`);
-  // });
+  factor = await TwilioVerify.verifyFactor(
+    new VerifyPushFactorPayload(factor.sid)
+  ).catch((err) => {
+    console.log(`Error verifying factor: ${err}`);
+  });
+
+  console.log(`Verified new factor for ${deviceName} with ${factor.sid}`);
+  return factor.sid;
 };
 
 export const getChallenge = async (factorSid, challengeSid) => {

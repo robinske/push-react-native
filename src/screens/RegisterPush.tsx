@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import { createFactor } from "../api/verify";
 
-const RegisterPush = ({ route }) => {
+const RegisterPush = ({ route, navigation }) => {
   // const { phoneNumber } = route.params;
   const phoneNumber = "placeholder-1052ce9377afc64bca";
   return (
@@ -15,7 +15,9 @@ const RegisterPush = ({ route }) => {
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
         onPress={() => {
-          createFactor(phoneNumber);
+          createFactor(phoneNumber).then((factorSid) => {
+            navigation.navigate("Gated");
+          });
         }}
       >
         <Text style={styles.buttonText}>Yes, use this device</Text>
