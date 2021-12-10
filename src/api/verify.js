@@ -1,4 +1,4 @@
-import { BASE_URL } from "react-native-dotenv";
+import { BASE_URL } from "@env";
 
 const sendSmsVerification = async (phoneNumber) => {
   try {
