@@ -50,8 +50,8 @@ export const createFactor = async (phoneNumber) => {
       deviceToken,
       json.token
     );
-    console.log(payload);
     let factor = await TwilioVerify.createFactor(payload);
+    console.log(factor.sid);
   } catch (err) {
     console.log(`ERROR: ${err}`);
   }
