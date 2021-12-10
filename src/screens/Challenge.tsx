@@ -15,7 +15,10 @@ const Challenge = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Image style={styles.logo} source={require("../assets/owl-bank.png")} />
+      <Image
+        style={styles.logo}
+        source={require("../../assets/owl-bank.png")}
+      />
       <Text style={styles.message}>
         Someone's trying to log into your account. Everything look ok? Request
         was sent from {challenge.location} with {challenge.deviceInfo}.

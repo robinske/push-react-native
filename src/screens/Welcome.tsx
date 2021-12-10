@@ -10,7 +10,10 @@ import {
 const Welcome = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Image style={styles.logo} source={require("../assets/owl-bank.png")} />
+      <Image
+        style={styles.logo}
+        source={require("../../assets/owl-bank.png")}
+      />
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
         onPress={() => console.log("TODO - trigger push challenge!")}

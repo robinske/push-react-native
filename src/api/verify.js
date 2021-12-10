@@ -1,4 +1,4 @@
-import { BASE_URL, ACCESS_TOKEN_URL } from "react-native-dotenv";
+import { BASE_URL, ACCESS_TOKEN_URL } from "@env";
 // import { getDeviceName, getDeviceToken } from "react-native-device-info";
 
 // TODO - implement hashing1!

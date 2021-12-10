@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 
 const Gated = ({ navigation }) => {
-  const image = require("../assets/banking.png");
+  const image = require("../../assets/banking.png");
   return (
     <View style={{ flex: 1 }}>
       <Image style={styles.image} source={image} />
