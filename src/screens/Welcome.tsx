@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,17 +6,44 @@ import {
   Image,
   Text,
 } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { silentChallenge } from "../api/verify";
 
 const Welcome = ({ navigation }) => {
+  const [spinner, setSpinner] = useState(false);
+
   return (
     <SafeAreaView style={styles.wrapper}>
+      <Spinner
+        visible={spinner}
+        textContent={"Verifying..."}
+        textStyle={styles.spinnerTextStyle}
+      />
       <Image
         style={styles.logo}
         source={require("../../assets/owl-bank.png")}
       />
       <TouchableOpacity
         style={{ backgroundColor: "#36D576", ...styles.button }}
-        onPress={() => console.log("TODO - trigger push challenge!")}
+        onPress={() => {
+          setSpinner(true);
+
+          AsyncStorage.getItem("@factor_sid")
+            .then((factorSid) =>
+              silentChallenge(factorSid).then((approved) => {
+                setSpinner(false);
+                if (approved) {
+                  navigation.navigate("Gated");
+                }
+              })
+            )
+            .catch(() => {
+              setSpinner(false);
+              navigation.replace("PhoneNumber");
+            });
+        }}
       >
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
@@ -69,6 +96,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontSize: 16,
+  },
+
+  spinnerTextStyle: {
+    color: "white",
   },
 });
 

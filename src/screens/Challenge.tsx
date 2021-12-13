@@ -11,7 +11,7 @@ import { getChallenge, updateChallenge } from "../api/verify";
 
 const Challenge = ({ route, navigation }) => {
   // const { factorSid } = route.params;
-  const challenge = await getChallenge("factorSid", "challengeSid");
+  getChallenge();
 
   return (
     <SafeAreaView style={styles.wrapper}>

@@ -1,4 +1,4 @@
-import { BASE_URL, ACCESS_TOKEN_URL } from "@env";
+import { BASE_URL, ACCESS_TOKEN_URL, CHALLENGE_URL } from "@env";
 import { getDeviceName, getDeviceToken } from "react-native-device-info";
 import { JSHash, CONSTANTS } from "react-native-hash";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -10,6 +10,8 @@ async function hash(value) {
 import TwilioVerify, {
   PushFactorPayload,
   VerifyPushFactorPayload,
+  UpdatePushChallengePayload,
+  ChallengeStatus,
 } from "@twilio/twilio-verify-for-react-native";
 
 export const createFactor = async (phoneNumber) => {
@@ -47,7 +49,6 @@ export const createFactor = async (phoneNumber) => {
     );
 
     let factor = await TwilioVerify.createFactor(payload);
-
     factor = await TwilioVerify.verifyFactor(
       new VerifyPushFactorPayload(factor.sid)
     );
@@ -61,14 +62,35 @@ export const createFactor = async (phoneNumber) => {
   }
 };
 
-export const getChallenge = async (factorSid, challengeSid) => {
-  // const challenge = await TwilioVerify.getChallenge(challengeSid, factorSid);
-  // return challenge;
-  return {
-    location: "United States",
-    deviceInfo: "Chrome running on Mac OSX",
-    sid: "abc1232456",
-  };
+export const silentChallenge = async (factorSid) => {
+  const identity = await AsyncStorage.getItem("@identity");
+
+  const data = JSON.stringify({
+    identity,
+    factor: factorSid,
+    message: "Are you trying to login?",
+  });
+
+  const response = await fetch(CHALLENGE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
+
+  const json = await response.json();
+  const challengeSid = json.sid;
+
+  // silently approve
+  const payload = new UpdatePushChallengePayload(
+    factorSid,
+    challengeSid,
+    ChallengeStatus.Approved
+  );
+  let updated = await TwilioVerify.updateChallenge(payload);
+  updated = await TwilioVerify.getChallenge(challengeSid, factorSid);
+  return updated.status === ChallengeStatus.Approved;
 };
 
 export const updateChallenge = async (factorSid, challengeSid, status) => {
