@@ -1,10 +1,10 @@
 import { BASE_URL, ACCESS_TOKEN_URL, CHALLENGE_URL } from "@env";
 import { getDeviceName, getDeviceToken } from "react-native-device-info";
-import { JSHash, CONSTANTS } from "react-native-hash";
+import { sha256 } from "react-native-sha256";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 async function hash(value) {
-  return JSHash(value, CONSTANTS.HashAlgorithms.sha256);
+  return sha256(value);
 }
 
 import TwilioVerify, {
@@ -63,34 +63,40 @@ export const createFactor = async (phoneNumber) => {
 };
 
 export const silentChallenge = async (factorSid) => {
-  const identity = await AsyncStorage.getItem("@identity");
+  try {
+    const identity = await AsyncStorage.getItem("@identity");
 
-  const data = JSON.stringify({
-    identity,
-    factor: factorSid,
-    message: "Are you trying to login?",
-  });
+    const data = JSON.stringify({
+      identity,
+      factor: factorSid,
+      message: "Login request",
+    });
 
-  const response = await fetch(CHALLENGE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  });
+    const response = await fetch(CHALLENGE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
 
-  const json = await response.json();
-  const challengeSid = json.sid;
+    const json = await response.json();
+    const challengeSid = json.sid;
 
-  // silently approve
-  const payload = new UpdatePushChallengePayload(
-    factorSid,
-    challengeSid,
-    ChallengeStatus.Approved
-  );
-  let updated = await TwilioVerify.updateChallenge(payload);
-  updated = await TwilioVerify.getChallenge(challengeSid, factorSid);
-  return updated.status === ChallengeStatus.Approved;
+    // silently approve
+    const payload = new UpdatePushChallengePayload(
+      factorSid,
+      challengeSid,
+      ChallengeStatus.Approved
+    );
+    let updated = await TwilioVerify.updateChallenge(payload);
+    updated = await TwilioVerify.getChallenge(challengeSid, factorSid);
+
+    return updated.status === ChallengeStatus.Approved;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
 };
 
 export const updateChallenge = async (factorSid, challengeSid, status) => {

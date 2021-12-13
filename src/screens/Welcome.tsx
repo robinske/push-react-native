@@ -39,8 +39,9 @@ const Welcome = ({ navigation }) => {
                 }
               })
             )
-            .catch(() => {
+            .catch((e) => {
               setSpinner(false);
+              console.error(e);
               navigation.replace("PhoneNumber");
             });
         }}

@@ -348,6 +348,8 @@ PODS:
   - RNScreens (3.8.0):
     - React-Core
     - React-RCTImage
+  - RNSha256 (1.4.7):
+    - React
   - twilio-verify-for-react-native (0.2.0):
     - React-Core
     - TwilioVerify (~> 1.2.0)
@@ -414,6 +416,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSha256 (from `../node_modules/react-native-sha256`)
   - "twilio-verify-for-react-native (from `../node_modules/@twilio/twilio-verify-for-react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -504,6 +507,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSha256:
+    :path: "../node_modules/react-native-sha256"
   twilio-verify-for-react-native:
     :path: "../node_modules/@twilio/twilio-verify-for-react-native"
   Yoga:
@@ -557,11 +562,12 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: ea6b5c280997b2b32a587793163b1f10e580c4f7
   RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
+  RNSha256: bf2c90a9e0cec6dcbcc4100e4e19715ae7feaa34
   twilio-verify-for-react-native: f943e25ba7e6daaad43414f5705bf1bb0932b179
   TwilioVerify: bbee3d3e40b5735ab598b0ad661b068c50931191
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 11dbad78dee5b34d80d46b738f8034112675c495
+PODFILE CHECKSUM: 64a9884c24ea902fcdf1f8adbb5435b039bf0e16
 
 COCOAPODS: 1.11.2

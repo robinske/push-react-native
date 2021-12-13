@@ -145,7 +145,6 @@
 				06EEF8C3FD968CC38094A08C /* Pods-VerifyPush-VerifyPushTests.debug.xcconfig */,
 				2384460503A9EFF162564DE1 /* Pods-VerifyPush-VerifyPushTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -263,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=~/.nvm/versions/node/v14.17.6/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		0386E766DE674663AA258D59 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273K3M8YNA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = VerifyPush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 273K3M8YNA;
 				INFOPLIST_FILE = VerifyPush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

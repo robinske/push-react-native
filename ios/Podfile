@@ -12,6 +12,7 @@ target 'VerifyPush' do
     :hermes_enabled => false
   )
 
+  pod 'RNSha256', :path => '../node_modules/react-native-sha256'
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
 
   target 'VerifyPushTests' do
