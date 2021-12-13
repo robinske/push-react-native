@@ -22,10 +22,14 @@ const RegisterPush = ({ route, navigation }) => {
         style={{ backgroundColor: "#36D576", ...styles.button }}
         onPress={() => {
           setSpinner(true);
-          createFactor(phoneNumber).then((factorSid) => {
-            setSpinner(false);
-            navigation.navigate("Gated");
-          });
+          createFactor(phoneNumber)
+            .then(() => {
+              setSpinner(false);
+              navigation.navigate("Gated");
+            })
+            .catch((e) => {
+              console.error(e);
+            });
         }}
       >
         <Text style={styles.buttonText}>Yes, use this device</Text>

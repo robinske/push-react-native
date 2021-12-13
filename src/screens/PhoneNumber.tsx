@@ -21,7 +21,11 @@ const PhoneNumber = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <Spinner visible={spinner} textContent={"Sending SMS..."} />
+        <Spinner
+          visible={spinner}
+          textContent={"Sending SMS..."}
+          textStyle={styles.spinnerTextStyle}
+        />
         <SafeAreaView style={styles.wrapper}>
           <View style={styles.welcome}>
             <Text>Welcome!</Text>
@@ -103,6 +107,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     color: "gray",
+  },
+
+  spinnerTextStyle: {
+    color: "#FFFFFF",
   },
 });
 
