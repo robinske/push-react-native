@@ -4,23 +4,24 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Button,
   Text,
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import PhoneInput from "react-native-phone-number-input";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import { sendSmsVerification } from "../api/verify";
 
 const PhoneNumber = ({ navigation }) => {
+  const [spinner, setSpinner] = useState(false);
   const [value, setValue] = useState("");
   const [formattedValue, setFormattedValue] = useState("");
-  const [smsSent, setSmsSent] = useState(false);
   const phoneInput = useRef<PhoneInput>(null);
 
   return (
     <>
       <View style={styles.container}>
+        <Spinner visible={spinner} textContent={"Sending SMS..."} />
         <SafeAreaView style={styles.wrapper}>
           <View style={styles.welcome}>
             <Text>Welcome!</Text>
@@ -43,25 +44,15 @@ const PhoneNumber = ({ navigation }) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
+              setSpinner(true);
               sendSmsVerification(formattedValue).then((sent) => {
-                setSmsSent(sent);
+                setSpinner(false);
                 navigation.navigate("Otp", { phoneNumber: formattedValue });
               });
             }}
           >
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
-          {smsSent && (
-            <View>
-              <Text
-                style={styles.status}
-              >{`Sent SMS to ${formattedValue}`}</Text>
-            </View>
-          )}
-          <Button
-            title="Log in"
-            onPress={() => navigation.replace("Welcome")}
-          />
         </SafeAreaView>
       </View>
     </>

@@ -26,7 +26,7 @@ const Otp = ({ route, navigation }) => {
         onCodeFilled={(code) => {
           checkVerification(phoneNumber, code).then((success) => {
             if (!success) setInvalidCode(true);
-            success && navigation.replace("Gated");
+            success && navigation.replace("RegisterPush", { phoneNumber });
           });
         }}
       />

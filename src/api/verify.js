@@ -13,8 +13,8 @@ import TwilioVerify, {
 } from "@twilio/twilio-verify-for-react-native";
 
 export const createFactor = async (phoneNumber) => {
-  console.log("creating factor!");
   const identity = hash(phoneNumber);
+  console.log(`Creating factor with identity ${identity}`);
 
   const response = await fetch(ACCESS_TOKEN_URL, {
     method: "POST",

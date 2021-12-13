@@ -6,8 +6,7 @@ import { createFactor } from "../api/verify";
 
 const RegisterPush = ({ route, navigation }) => {
   const [spinner, setSpinner] = useState(false);
-  // const { phoneNumber } = route.params;
-  const phoneNumber = "placeholder-1052ce9377afc64bca";
+  const { phoneNumber } = route.params;
   return (
     <SafeAreaView style={styles.wrapper}>
       <Spinner
@@ -24,6 +23,7 @@ const RegisterPush = ({ route, navigation }) => {
         onPress={() => {
           setSpinner(true);
           createFactor(phoneNumber).then((factorSid) => {
+            setSpinner(false);
             navigation.navigate("Gated");
           });
         }}
