@@ -3605,6 +3605,11 @@ react-native-dotenv@^3.3.0:
   dependencies:
     dotenv "^10.0.0"
 
+react-native-hash@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-hash/-/react-native-hash-2.0.0.tgz#268356c2e7409443b7dec19d810723c06b733323"
+  integrity sha512-LL34Vk5zUTJlp0lOEehIF0TUNTGcYJ0vPGD1xkdpcE8DnRu1dCKUKkoQBtV196v9FlFY2nrWXGz2X7LJE/ggbg==
+
 react-native-loading-spinner-overlay@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-2.0.0.tgz#30934b6f07cb39711020d6b422a02a2a56763a73"

@@ -1,10 +1,9 @@
 import { BASE_URL, ACCESS_TOKEN_URL } from "@env";
 import { getDeviceName, getDeviceToken } from "react-native-device-info";
+import { JSHash, CONSTANTS } from "react-native-hash";
 
-// TODO - implement hashing1!
-function hash(value) {
-  // return JSHash(value, CONSTANTS.HashAlgorithms.sha256);
-  return value;
+async function hash(value) {
+  return JSHash(value, CONSTANTS.HashAlgorithms.sha256);
 }
 
 import TwilioVerify, {
@@ -13,7 +12,8 @@ import TwilioVerify, {
 } from "@twilio/twilio-verify-for-react-native";
 
 export const createFactor = async (phoneNumber) => {
-  const identity = hash(phoneNumber);
+  console.log(phoneNumber);
+  const identity = await hash(phoneNumber);
   console.log(`Creating factor with identity ${identity}`);
 
   const response = await fetch(ACCESS_TOKEN_URL, {
@@ -27,11 +27,8 @@ export const createFactor = async (phoneNumber) => {
     }),
   }).catch((err) => console.log(`Error fetching access token: ${err}`));
 
-  console.log("fetched access token");
-
   const json = await response.json();
 
-  console.log(json.identity);
   const deviceName = await getDeviceName().catch(
     () => `${phoneNumber}'s Device'`
   );
@@ -39,8 +36,6 @@ export const createFactor = async (phoneNumber) => {
   const deviceToken = await getDeviceToken().catch(
     () => "000000000000000000000000000000000000"
   );
-
-  console.log(deviceToken);
 
   const payload = new PushFactorPayload(
     deviceName,
@@ -57,7 +52,6 @@ export const createFactor = async (phoneNumber) => {
     console.log(`Error verifying factor: ${err}`);
   });
 
-  console.log(`Verified new factor for ${deviceName} with ${factor.sid}`);
   return factor.sid;
 };
 
