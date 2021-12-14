@@ -987,7 +987,7 @@
   version "0.2.0"
   resolved "https://github.com/twilio/twilio-verify-for-react-native.git#98cf1b8384d24b9a0ae6b773a85aeb20e94afd88"
 
-"@twotalltotems/react-native-otp-input@^1.3.11":
+"@twotalltotems/react-native-otp-input@^1.3.7":
   version "1.3.11"
   resolved "https://registry.yarnpkg.com/@twotalltotems/react-native-otp-input/-/react-native-otp-input-1.3.11.tgz#cd075f155be188bc9bb294ea8ef311667b8efb3d"
   integrity sha512-xSsEMa8llYHITKgx1FGwU3uK56Kk6+abgkJpo57pLnUpYC2CZpvhkvRKhFa7Ui6BhdRuh0Ob1O7q234d3CksRg==

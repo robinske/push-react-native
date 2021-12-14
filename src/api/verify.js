@@ -58,7 +58,8 @@ export const createFactor = async (phoneNumber) => {
 
     return factor.sid;
   } catch (e) {
-    console.error(`Error creating factor: ${e}`);
+    console.error(`ERROR!`);
+    console.error(`${e}`);
   }
 };
 
