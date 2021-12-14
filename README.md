@@ -4,7 +4,7 @@
 
 **React Native environment**
 
-Follow the instructions [here to set up your environment with Expo](https://reactnative.dev/docs/environment-setup)
+Follow the instructions [here to set up your environment with React Native CLI](https://reactnative.dev/docs/environment-setup)
 
 **Twilio Verify**
 

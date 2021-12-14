@@ -9,7 +9,7 @@ import {
 import Spinner from "react-native-loading-spinner-overlay";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { silentChallenge } from "../api/verify";
+import { silentAuthorization } from "../api/verify";
 
 const Welcome = ({ navigation }) => {
   const [spinner, setSpinner] = useState(false);
@@ -32,7 +32,7 @@ const Welcome = ({ navigation }) => {
 
           AsyncStorage.getItem("@factor_sid")
             .then((factorSid) =>
-              silentChallenge(factorSid).then((approved) => {
+              silentAuthorization(factorSid).then((approved) => {
                 setSpinner(false);
                 if (approved) {
                   navigation.navigate("Gated");

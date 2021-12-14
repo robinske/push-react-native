@@ -63,7 +63,7 @@ export const createFactor = async (phoneNumber) => {
   }
 };
 
-export const silentChallenge = async (factorSid) => {
+export const silentAuthorization = async (factorSid) => {
   try {
     const identity = await AsyncStorage.getItem("@identity");
 
@@ -98,12 +98,6 @@ export const silentChallenge = async (factorSid) => {
     console.error(e);
     return false;
   }
-};
-
-export const updateChallenge = async (factorSid, challengeSid, status) => {
-  await TwilioVerify.updateChallenge(
-    new UpdatePushChallengePayload(factorSid, challengeSid, status)
-  );
 };
 
 export const sendSmsVerification = async (phoneNumber) => {
