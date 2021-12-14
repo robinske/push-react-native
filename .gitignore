@@ -2,6 +2,7 @@
 
 yarn-error.log
 node_modules/
+.vscode/
 .expo/
 dist/
 npm-debug.*
