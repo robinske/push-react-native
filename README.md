@@ -1,4 +1,4 @@
-# SMS Verification in React Native
+# Push Authentication in React Native
 
 ## Requirements
 
